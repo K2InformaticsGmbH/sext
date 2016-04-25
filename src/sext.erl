@@ -658,12 +658,9 @@ decode_next(<<?pid, Rest/binary>>) -> decode_pid(Rest);
 decode_next(<<?port, Rest/binary>>) -> decode_port(Rest);
 decode_next(<<?reference,Rest/binary>>) -> decode_ref(Rest);
 decode_next(<<?tuple,Sz:32, Rest/binary>>) -> decode_tuple(Sz,Rest);
-<<<<<<< HEAD
 %% decode_next(<<?nil, Rest/binary>>) -> {[], Rest};
 %% decode_next(<<?old_list, Rest/binary>>) -> decode_list(Rest);
 decode_next(<<?list, 1, Rest/binary>>) -> decode_map(Rest);
-=======
->>>>>>> master
 decode_next(<<?list, Rest/binary>>) -> decode_list(Rest);
 decode_next(<<?negbig, Rest/binary>>) -> decode_neg_big(Rest);
 decode_next(<<?posbig, Rest/binary>>) -> decode_pos_big(Rest);
@@ -767,7 +764,6 @@ partial_decode_list(<<X,_/binary>> = Next, Acc) when ?is_sext(X) ->
 partial_decode_list(Rest, Acc) ->
     {partial, lists:reverse(Acc) ++ '_', Rest}.
 
-<<<<<<< HEAD
 decode_map(<<Sz:32, Rest/binary>>) ->
     decode_map(Sz, Rest, #{}).
 
@@ -778,9 +774,6 @@ decode_map(N, Bin, M) ->
     {V, Bin2} = decode_next(Bin1),
     decode_map(N-1, Bin2, maps:put(K, V, M)).
 
-
-=======
->>>>>>> master
 decode_list(Elems) ->
     decode_list(Elems, []).
 
